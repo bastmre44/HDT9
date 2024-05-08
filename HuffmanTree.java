@@ -1,6 +1,9 @@
-import java.util.*;
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.PriorityQueue;
 
-public class HuffmanTree {
+public class HuffmanTree implements Serializable {
     Nodo raiz;
 
     public void construirArbol(Map<Character, Integer> frecuencias) {

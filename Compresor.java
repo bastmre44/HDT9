@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 
 public class Compresor {
-    public static void comprimirArchivo(String inputFile, String outputFile) throws IOException {
+    public static void comprimirArchivo(String inputFile, String outputFile, String treeFile) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(inputFile));
         StringBuilder texto = new StringBuilder();
         String linea;
@@ -42,5 +42,28 @@ public class Compresor {
 
         outputStream.close();
         System.out.println("Archivo comprimido correctamente.");
+
+        // Guardar el árbol de Huffman en un archivo
+        FileOutputStream treeOutputStream = new FileOutputStream(treeFile);
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(treeOutputStream);
+        objectOutputStream.writeObject(arbol);
+        objectOutputStream.close();
+        treeOutputStream.close();
+    }
+
+    // Método para imprimir el árbol de Huffman (solo para propósitos de depuración)
+    public static void imprimirArbol(HuffmanTree arbol) {
+        imprimirArbolRecursivo(arbol.raiz, "");
+    }
+
+    private static void imprimirArbolRecursivo(Nodo nodo, String prefijo) {
+        if (nodo != null) {
+            if (nodo.valor != '\0') {
+                System.out.println(prefijo + nodo.valor);
+            } else {
+                imprimirArbolRecursivo(nodo.izquierda, prefijo + "0");
+                imprimirArbolRecursivo(nodo.derecha, prefijo + "1");
+            }
+        }
     }
 }

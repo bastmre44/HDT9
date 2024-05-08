@@ -1,4 +1,6 @@
-class Nodo implements Comparable<Nodo> {
+import java.io.Serializable;
+
+public class Nodo implements Comparable<Nodo>, Serializable {
     char valor;
     int frecuencia;
     Nodo izquierda, derecha;
